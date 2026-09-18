@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Катерина Оніщенко | 50 Десертів На Сушці</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cobalt: '#0B2E68',
+                        'cobalt-dark': '#071F47',
+                        coral: '#FF3B30',
+                        'coral-dark': '#D72B21',
+                        ink: '#111111',
+                        softgrey: '#F4F5F8'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <style>
+        body {
+            background-color: #0B2E68;
+            color: #FFFFFF;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .slide-shadow {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B2E68;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF3B30;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-coral selection:text-white">
+
+    <header class="sticky top-0 z-40 bg-cobalt/95 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" onclick="switchTab('presentation')" class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-xl bg-coral text-white flex items-center justify-center font-black text-xl">50</span>
+                <div class="flex flex-col">
+                    <span class="text-sm font-black tracking-wider uppercase text-white leading-tight">КАТЕРИНА ОНІЩЕНКО</span>
+                    <span class="text-[10px] tracking-widest text-coral uppercase font-bold">50 ДЕСЕРТІВ НА СУШЦІ</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-2 font-bold text-xs uppercase tracking-wider">
+                <button onclick="switchTab('presentation')" id="nav-presentation" class="px-5 py-2.5 rounded-xl transition-all text-white bg-coral">
+                    <i class="fa-solid fa-layer-group mr-2"></i>Презентація
+                </button>
+                <button onclick="switchTab('catalog')" id="nav-catalog" class="px-5 py-2.5 rounded-xl transition-all text-white/80 hover:text-white hover:bg-white/10">
+                    <i class="fa-solid fa-utensils mr-2"></i>Каталог (50)
+                </button>
+                <button onclick="switchTab('secrets')" id="nav-secrets" class="px-5 py-2.5 rounded-xl transition-all text-white/80 hover:text-white hover:bg-white/10">
+                    <i class="fa-solid fa-lightbulb mr-2"></i>Секрети
+                </button>
+            </nav>
+
+            <!-- Favorites Count -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleFavoritesModal()" class="bg-white/10 text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 hover:bg-coral transition-colors">
+                    <i class="fa-solid fa-heart text-coral group-hover:text-white"></i>
+                    <span class="hidden sm:inline">Збережені</span>
+                    <span id="fav-count" class="bg-coral text-white text-xs px-2 py-0.5 rounded-full">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section id="tab-presentation" class="py-6 lg:py-10 px-4 max-w-6xl mx-auto">
+            
+            <!-- Slide Controller Bar -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10 shadow-lg">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-black uppercase tracking-wider text-white bg-coral px-3 py-1 rounded-lg">Слайди</span>
+                    <span id="slide-counter-text" class="text-xs font-bold text-white/80">Слайд 1 з 5</span>
+                </div>
+
+                <!-- Slide Dots -->
+                <div class="flex justify-center items-center gap-2">
+                    <button onclick="goToSlide(1)" id="dot-1" class="h-2.5 rounded-full transition-all w-8 bg-coral"></button>
+                    <button onclick="goToSlide(2)" id="dot-2" class="h-2.5 rounded-full transition-all w-2.5 bg-white/30 hover:bg-white/60"></button>
+                    <button onclick="goToSlide(3)" id="dot-3" class="h-2.5 rounded-full transition-all w-2.5 bg-white/30 hover:bg-white/60"></button>
+                    <button onclick="goToSlide(4)" id="dot-4" class="h-2.5 rounded-full transition-all w-2.5 bg-white/30 hover:bg-white/60"></button>
+                    <button onclick="goToSlide(5)" id="dot-5" class="h-2.5 rounded-full transition-all w-2.5 bg-white/30 hover:bg-white/60"></button>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex items-center gap-2">
+                    <button onclick="prevSlide()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-colors">
+                        <i class="fa-solid fa-chevron-left mr-1"></i> Назад
+                    </button>
+                    <button onclick="nextSlide()" class="px-4 py-2 bg-coral hover:bg-coral-dark text-white rounded-xl text-xs font-bold transition-colors">
+                        Далі <i class="fa-solid fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative min-h-[580px]">
+                
+                <!-- SLIDE 1: Cover Page -->
+                <div id="slide-1" class="slide-shadow bg-cobalt rounded-3xl border border-white/20 p-8 lg:p-12 relative min-h-[580px] flex flex-col md:flex-row gap-8 items-center">
+                    <div class="md:w-5/12 w-full">
+                        <div class="relative rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl h-[420px]">
+                            <img src="IMG_4571_2.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80';" alt="Катерина Оніщенко" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <div class="md:w-7/12 w-full flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-6">
+                                <span class="text-xs font-black uppercase tracking-widest text-white/80">КАТЕРИНА ОНІЩЕНКО</span>
+                                <span class="text-xs font-black uppercase tracking-widest text-white/80">ЗБІРКА РЕЦЕПТІВ</span>
+                            </div>
+
+                            <h1 class="text-5xl lg:text-7xl font-black text-white leading-none tracking-tight mb-6">
+                                50<br>
+                                ДЕСЕРТІВ<br>
+                                <span class="text-coral">НА СУШЦІ</span>
+                            </h1>
+                        </div>
+
+                        <div class="border-t border-white/20 pt-6">
+                            <p class="text-xs lg:text-sm font-bold tracking-widest uppercase text-white/90">
+                                МАКСИМУМ БІЛКУ • МІНІМУМ ЖИРІВ • БЕЗ ЦУКРУ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="slide-2" class="hidden slide-shadow bg-cobalt rounded-3xl border border-white/20 p-8 lg:p-12 relative min-h-[580px] flex flex-col justify-between">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+                        <div>
+                            <h2 class="text-3xl lg:text-5xl font-black text-white tracking-tight uppercase leading-tight">
+                                СЕКРЕТИ<br>ДЕСЕРТІВ НА СУШЦІ
+                            </h2>
+                        </div>
+                        <div class="w-32 h-24 rounded-2xl overflow-hidden border border-white/20 shrink-0">
+                            <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover" alt="Десерт">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-auto">
+                        <div class="bg-white text-ink p-6 rounded-2xl flex flex-col justify-between h-56">
+                            <h3 class="font-black text-sm uppercase">1. ДЖЕРЕЛА БІЛКА</h3>
+                            <p class="text-xs font-bold leading-relaxed text-ink/80 uppercase">
+                                ЗНЕЖИРЕНИЙ СИР (0-0.2%), ЯЄЧНІ БІЛКИ ТА СИРОВАТКОВИЙ ПРОТЕЇН ДАЮТЬ 20-30Г БІЛКА НА ПОРЦІЮ.
+                            </p>
+                        </div>
+
+                        <div class="bg-white text-ink p-6 rounded-2xl flex flex-col justify-between h-56">
+                            <h3 class="font-black text-sm uppercase">2. ЗАМІННИКИ ЦУКРУ</h3>
+                            <p class="text-xs font-bold leading-relaxed text-ink/80 uppercase">
+                                ТЕРМОСТАБІЛЬНА СУКРАЛОЗА, СТЕВІЯ ТА ЕРИТРІТОЛ БЕЗ КАЛОРІЙ ТА БЕЗ СТРИБКІВ ІНСУЛІНУ.
+                            </p>
+                        </div>
+
+                        <div class="bg-white text-ink p-6 rounded-2xl flex flex-col justify-between h-56">
+                            <h3 class="font-black text-sm uppercase">3. КОНТРОЛЬ ЖИРІВ</h3>
+                            <p class="text-xs font-bold leading-relaxed text-ink/80 uppercase">
+                                ЗНЕЖИРЕНЕ ВІВСЯНЕ БОРОШНО, КРОХМАЛЬ ТА СИЛІКОНОВІ ФОРМИ ЗАМІСТЬ ОЛІЇ ТА ПШЕНИЦІ.
+                            </p>
+                        </div>
+
+                        <div class="bg-white text-ink p-6 rounded-2xl flex flex-col justify-between h-56">
+                            <h3 class="font-black text-sm uppercase">4. ОБ'ЄМ І ТЕКСТУРА</h3>
+                            <p class="text-xs font-bold leading-relaxed text-ink/80 uppercase">
+                                ЖЕЛА ТИН, АГАР-АГАР ТА ЗБИТІ БІЛКИ СТВОРЮЮТЬ ВІДЧУТТЯ СИТОСТІ БЕЗ ЗАЙВИХ КАЛОРІЙ.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <span class="text-4xl font-black text-white">01</span>
+                    </div>
+                </div>
+
+                <div id="slide-3" class="hidden slide-shadow bg-white text-ink rounded-3xl p-8 lg:p-12 relative min-h-[580px] flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-6">
+                        <h2 class="text-4xl lg:text-6xl font-black text-coral tracking-tight uppercase">
+                            РОЗДІЛИ ЗБІРКИ
+                        </h2>
+                        <span class="text-3xl font-black text-ink">02</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto">
+                        <div class="h-64 rounded-2xl overflow-hidden bg-softgrey p-4 flex flex-col justify-end relative">
+                            <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80" class="absolute inset-0 w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                            <span class="relative text-white font-black text-lg">СИРНІ ДЕСЕРТИ</span>
+                        </div>
+
+                        <div class="h-64 rounded-2xl overflow-hidden bg-softgrey p-4 flex flex-col justify-end relative">
+                            <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=600&q=80" class="absolute inset-0 w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                            <span class="relative text-white font-black text-lg">ВИПІЧКА ТА БАТОНЧИКИ</span>
+                        </div>
+
+                        <div class="flex flex-col justify-center space-y-4 text-xs font-bold uppercase">
+                            <div class="border-b border-ink/10 pb-3">
+                                <span class="text-coral block font-black">01. СИРНІ ДЕСЕРТИ</span>
+                                <span>Запіканки, муси, тірамісу</span>
+                            </div>
+                            <div class="border-b border-ink/10 pb-3">
+                                <span class="text-coral block font-black">02. ЖЕЛЕЙНІ ДЕСЕРТИ</span>
+                                <span>Пана-кота, суфле, желе</span>
+                            </div>
+                            <div class="border-b border-ink/10 pb-3">
+                                <span class="text-coral block font-black">03. ПРОТЕЇНОВА ВИПІЧКА</span>
+                                <span>Кекси за 2 хв, брауні, панкейки</span>
+                            </div>
+                            <div>
+                                <span class="text-coral block font-black">04. МОРОЗИВО ТА БАТОНЧИКИ</span>
+                                <span>Сорбети, трюфелі, Баунті</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="slide-4" class="hidden slide-shadow bg-cobalt text-white rounded-3xl border border-white/20 p-8 lg:p-12 relative min-h-[580px] flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-6">
+                        <h2 class="text-3xl lg:text-5xl font-black tracking-tight uppercase">
+                            ПОРІВНЯЛЬНИЙ АНАЛІЗ КБЖУ
+                        </h2>
+                        <span class="text-3xl font-black">03</span>
+                    </div>
+
+                    <div class="bg-white text-ink rounded-2xl p-6 overflow-x-auto my-auto">
+                        <table class="w-full text-left text-xs font-bold">
+                            <thead>
+                                <tr class="border-b-2 border-ink/10 uppercase">
+                                    <th class="p-3">ТИП ДЕСЕРТУ</th>
+                                    <th class="p-3">КАЛОРІЇ</th>
+                                    <th class="p-3">БІЛКИ</th>
+                                    <th class="p-3">ЖИРИ</th>
+                                    <th class="p-3">ВУГЛЕВОДИ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-ink/10">
+                                    <td class="p-3">Класичний Тірамісу</td>
+                                    <td class="p-3 text-red-600">450 ккал</td>
+                                    <td class="p-3">5g</td>
+                                    <td class="p-3">28g</td>
+                                    <td class="p-3">45g</td>
+                                </tr>
+                                <tr class="bg-softgrey">
+                                    <td class="p-3 font-black text-coral">Фітнес-Тірамісу (#6)</td>
+                                    <td class="p-3 font-black text-green-600">175 ккал</td>
+                                    <td class="p-3 font-black">26g</td>
+                                    <td class="p-3 font-black">2g</td>
+                                    <td class="p-3 font-black">13g</td>
+                                </tr>
+                                <tr class="border-b border-ink/10">
+                                    <td class="p-3">Звичайний Брауні</td>
+                                    <td class="p-3 text-red-600">420 ккал</td>
+                                    <td class="p-3">4g</td>
+                                    <td class="p-3">22g</td>
+                                    <td class="p-3">50g</td>
+                                </tr>
+                                <tr class="bg-softgrey">
+                                    <td class="p-3 font-black text-coral">Протеїновий Брауні (#32)</td>
+                                    <td class="p-3 font-black text-green-600">195 ккал</td>
+                                    <td class="p-3 font-black">26g</td>
+                                    <td class="p-3 font-black">3g</td>
+                                    <td class="p-3 font-black">15g</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-coral text-white p-4 rounded-xl text-center font-black text-xs uppercase tracking-wider">
+                        РЕЗУЛЬТАТ: У 4-5 РАЗІВ БІЛЬШЕ БІЛКА ТА ВДВІЧІ МЕНШЕ КАЛОРІЙ!
+                    </div>
+                </div>
+
+                <div id="slide-5" class="hidden slide-shadow bg-white text-ink rounded-3xl p-8 lg:p-12 relative min-h-[580px] flex flex-col justify-between text-center items-center">
+                    <div class="w-full flex justify-between items-start">
+                        <span class="text-xs font-black uppercase text-coral">КАТЕРИНА ОНІЩЕНКО</span>
+                        <span class="text-3xl font-black">04</span>
+                    </div>
+
+                    <div class="max-w-2xl mx-auto my-auto">
+                        <h2 class="text-4xl lg:text-6xl font-black text-coral tracking-tight uppercase mb-6">
+                            ГОТОВІ ДО СМАЧНОГО ЖИРОСПАЛЕННЯ?
+                        </h2>
+                        <p class="text-sm font-bold text-ink/70 mb-8 uppercase tracking-wider">
+                            Переходьте до каталогу та обирайте свій перший десерт уже сьогодні!
+                        </p>
+                        <button onclick="switchTab('catalog')" class="bg-coral hover:bg-coral-dark text-white px-10 py-5 rounded-2xl font-black text-base shadow-2xl transition-transform hover:scale-105 uppercase tracking-wider">
+                            Відкрити всі 50 рецептів <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+
+                    <div class="text-xs font-bold text-ink/40 uppercase">
+                        50 ДЕСЕРТІВ НА СУШЦІ • 2026
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="tab-catalog" class="hidden py-8 px-4 max-w-7xl mx-auto">
+            <div class="bg-white text-ink rounded-3xl p-6 mb-8 border border-white/10 shadow-lg">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+                    <div class="relative w-full lg:w-80">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-ink/40"></i>
+                        <input type="text" id="search-input" oninput="filterRecipes()" placeholder="Пошук рецепту..." class="w-full pl-11 pr-4 py-3 bg-softgrey rounded-xl focus:outline-none text-xs font-bold">
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-center gap-2">
+                        <button onclick="setCategory('all')" id="cat-all" class="cat-btn px-4 py-2 rounded-xl text-xs font-black uppercase transition-all bg-coral text-white">Всі (50)</button>
+                        <button onclick="setCategory('syrmy')" id="cat-syrmy" class="cat-btn px-4 py-2 rounded-xl text-xs font-black uppercase transition-all bg-softgrey text-ink/70">Сирні</button>
+                        <button onclick="setCategory('jelly')" id="cat-jelly" class="cat-btn px-4 py-2 rounded-xl text-xs font-black uppercase transition-all bg-softgrey text-ink/70">Желейні</button>
+                        <button onclick="setCategory('baking')" id="cat-baking" class="cat-btn px-4 py-2 rounded-xl text-xs font-black uppercase transition-all bg-softgrey text-ink/70">Випічка</button>
+                        <button onclick="setCategory('icecream')" id="cat-icecream" class="cat-btn px-4 py-2 rounded-xl text-xs font-black uppercase transition-all bg-softgrey text-ink/70">Морозиво</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="recipe-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <section id="tab-secrets" class="hidden py-8 lg:py-12 px-4 max-w-5xl mx-auto">
+            <div class="bg-white text-ink rounded-3xl p-8 border border-white/10 shadow-lg space-y-6">
+                <h2 class="text-3xl font-black text-coral uppercase">СЕКРЕТИ ПРИГОТУВАННЯ</h2>
+                <p class="text-xs font-bold uppercase leading-relaxed text-ink/80">
+                    Використовуйте знежирений сир (0%), яєчні білки та ізолят сироваткового білка для забезпечення максимальної білкової цінності.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 5;
+
+        function goToSlide(slideNum) {
+            currentSlide = slideNum;
+            for (let i = 1; i <= totalSlides; i++) {
+                const slide = document.getElementById(`slide-${i}`);
+                const dot = document.getElementById(`dot-${i}`);
+                if (slide) slide.classList.add('hidden');
+                if (dot) dot.className = 'h-2.5 rounded-full transition-all w-2.5 bg-white/30 hover:bg-white/60';
+            }
+            const activeSlide = document.getElementById(`slide-${currentSlide}`);
+            const activeDot = document.getElementById(`dot-${currentSlide}`);
+            if (activeSlide) activeSlide.classList.remove('hidden');
+            if (activeDot) activeDot.className = 'h-2.5 rounded-full transition-all w-8 bg-coral';
+            
+            document.getElementById('slide-counter-text').textContent = `Слайд ${currentSlide} з ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) goToSlide(currentSlide + 1);
+            else goToSlide(1);
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) goToSlide(currentSlide - 1);
+            else goToSlide(totalSlides);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        const recipes = [
+            { id: 1, title: "Протеїновий запечений сирник", category: "syrmy", kcal: 195, protein: 28, fat: 3, carbs: 14, image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80" },
+            { id: 2, title: "Шоколадний сирний мус", category: "syrmy", kcal: 160, protein: 25, fat: 2, carbs: 10, image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=600&q=80" }
+        ];
+
+        function switchTab(tabId) {
+            ['presentation', 'catalog', 'secrets'].forEach(t => {
+                document.getElementById(`tab-${t}`).classList.add('hidden');
+            });
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            if (tabId === 'catalog') filterRecipes();
+        }
+
+        function filterRecipes() {
+            const grid = document.getElementById('recipe-grid');
+            grid.innerHTML = recipes.map(r => `
+                <div class="bg-white text-ink rounded-3xl p-5 border border-white/10 shadow-lg">
+                    <img src="${r.image}" class="w-full h-40 object-cover rounded-2xl mb-3">
+                    <h3 class="font-black text-sm uppercase mb-2">${r.title}</h3>
+                    <p class="text-xs font-black text-coral">${r.kcal} ккал | ${r.protein}g білка</p>
+                </div>
+            `).join('');
+        }
+
+        window.onload = function() {
+            goToSlide(1);
+        };
+    </script>
+</body>
+</html>
